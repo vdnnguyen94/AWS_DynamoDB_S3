@@ -2,7 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Windows;
-
+using DotNetEnv;
 namespace _301289600Nguyen_Lab2
 {
     /// <summary>
@@ -13,8 +13,17 @@ namespace _301289600Nguyen_Lab2
         public App()
         {
             // Register the Syncfusion license key
-            SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1JFaF5cXGRCf1JpRnxbf1x1ZFRMZVpbR39PIiBoS35Rc0RjWXtfc3FTQmJdV0FzVEFc");
+            // Load .env file
+            Env.Load();
+
+            var licenseKey = Environment.GetEnvironmentVariable("SYNCFUSION_LICENSE_KEY");
+
+            if (!string.IsNullOrEmpty(licenseKey))
+                SyncfusionLicenseProvider.RegisterLicense(licenseKey);
+            else
+                MessageBox.Show("Syncfusion license key is missing in .env file.", "Warning");
         }
+   
     }
 
 }

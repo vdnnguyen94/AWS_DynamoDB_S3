@@ -40,9 +40,14 @@ namespace _301289600Nguyen_Lab2
 
             try
             {
+                Env.Load();
+                var bucketName = Environment.GetEnvironmentVariable("AWS_BUCKET_NAME");
+                if (string.IsNullOrEmpty(bucketName))
+                    throw new Exception("Bucket name not found in .env");
+
                 var request = new GetObjectRequest
                 {
-                    BucketName = "aws-van-bookshelf-lab2",
+                    BucketName = bucketName,
                     Key = _selectedBook.S3Key
                 };
 

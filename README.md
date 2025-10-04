@@ -1,46 +1,45 @@
-# Bookshelf Reader (AWS + Syncfusion WPF)
+﻿# Bookshelf Reader (AWS + Syncfusion WPF)
 
 A C#/.NET WPF application that allows users to:
 - Log in via AWS DynamoDB user profile  
 - View their personal bookshelf retrieved from DynamoDB  
 - Read PDF books stored in Amazon S3 using the **Syncfusion PDF Viewer**  
 - Automatically **bookmark** their current page  
-- Sync bookmarks back to DynamoDB whenever they close or click �Bookmark�  
+- Sync bookmarks back to DynamoDB whenever they close or click “Bookmark”  
 
 Built as part of **Lab 2** for COMP306 (Cloud-Based Application Development).  
 
 ---
 
-## ?? Features
+## Features
 
 | Feature | Description |
 |----------|--------------|
-| ?? AWS DynamoDB | Stores user info, bookshelf list, and bookmarked pages |
-| ?? AWS S3 | Stores book PDF files, downloaded securely by key |
-| ?? Syncfusion PDF Viewer | Displays books within the app |
-| ?? Auto Bookmark | Automatically saves current page when closing or bookmarking |
-| ?? Real-time Refresh | Updates bookshelf automatically when returning from reader |
-| ?? Environment Config | All secrets stored in .env file for easy setup |
+| AWS DynamoDB | Stores user info, bookshelf list, and bookmarked pages |
+| AWS S3 | Stores book PDF files, downloaded securely by key |
+| Syncfusion PDF Viewer | Displays books within the app |
+| Auto Bookmark | Automatically saves current page when closing or bookmarking |
+| Real-time Refresh | Updates bookshelf automatically when returning from reader |
+| Environment Config | All secrets stored in .env file for easy setup |
 
 ---
 
-## ?? Project Structure
+## Project Structure
 
 \`\`\`
-?? _301289600Nguyen_Lab2
-?
-??? App.xaml / App.xaml.cs          ? Loads Syncfusion license
-??? Helper.cs                       ? Global AWS S3 client & shared memory stream
-??? BookOps.cs                      ? Handles DynamoDB book retrieval
-??? BookshelfItem.cs                ? DynamoDB table model
-??? MyBookListWindow.xaml(.cs)      ? Displays book list, handles refresh
-??? BookReadingWindow.xaml(.cs)     ? Displays PDF, handles bookmarking
-??? .env                            ? Stores AWS credentials and license key
+_301289600Nguyen_Lab2/
+├── App.xaml / App.xaml.cs      → Loads Syncfusion license
+├── Helper.cs                   → Global AWS S3 client & shared memory stream
+├── BookOps.cs                  → Handles DynamoDB book retrieval
+├── BookshelfItem.cs            → DynamoDB table model
+├── MyBookListWindow.xaml(.cs)  → Displays book list, handles refresh
+├── BookReadingWindow.xaml(.cs) → Displays PDF, handles bookmarking
+└── .env                        → Stores AWS credentials and license key
 \`\`\`
 
 ---
 
-## ?? Prerequisites
+## Prerequisites
 
 - .NET 6.0 or higher  
 - AWS Account (with DynamoDB & S3 setup)  
@@ -49,7 +48,7 @@ Built as part of **Lab 2** for COMP306 (Cloud-Based Application Development).
 
 ---
 
-## ?? Dependencies
+## Dependencies
 
 Install these NuGet packages:
 
@@ -62,7 +61,7 @@ Install these NuGet packages:
 
 ---
 
-## ?? .env Setup
+## .env Setup
 
 Create a file named \`.env\` at the **root of your project** with the following contents:
 
@@ -79,13 +78,13 @@ AWS_BUCKET_NAME=aws-van-bookshelf-lab2
 SYNCFUSION_LICENSE_KEY=your-syncfusion-license-key
 \`\`\`
 
-?? **Important:**  
-Never upload \`.env\` to GitHub � it contains private credentials.  
+⚠️ **Important:**  
+Never upload \`.env\` to GitHub — it contains private credentials.  
 Add \`.env\` to your \`.gitignore\` file.
 
 ---
 
-## ??? How to Run
+## How to Run
 
 1. **Clone or open** the project in Visual Studio.  
 2. Create and fill in your \`.env\` file as shown above.  
@@ -101,27 +100,27 @@ Add \`.env\` to your \`.gitignore\` file.
 
 ---
 
-## ?? How It Works
+## How It Works
 
-### ?? 1. Login
+###  1. Login
 User logs in with credentials stored in DynamoDB (Bookshelf table).  
 The system identifies the \`UserId\` and retrieves all books for that user.
 
-### ?? 2. Bookshelf Display
+### 2. Bookshelf Display
 \`MyBookListWindow\` loads the user's books:
 - Title, Authors, and bookmark info from DynamoDB.  
 - Books are ordered by \`LastReadTimestamp\`.
 
-### ?? 3. Reading Window
+###  3. Reading Window
 When a book is double-clicked:
 - \`BookReadingWindow\` opens.  
 - Fetches the book's PDF from S3 using its \`S3Key\`.  
 - Loads the PDF into the Syncfusion viewer.  
 - Keeps the stream alive using \`Helper.SelectedBookStream\`.
 
-### ?? 4. Bookmark Save
+###  4. Bookmark Save
 When:
-- The user clicks the �Bookmark� button, **or**
+- The user clicks the “Bookmark” button, **or**
 - Closes the reader window,  
 the app saves \`BookmarkedPage\` and \`LastReadTimestamp\` to DynamoDB.
 
@@ -129,7 +128,7 @@ the app saves \`BookmarkedPage\` and \`LastReadTimestamp\` to DynamoDB.
 
 ---
 
-## ?? Environment Variables in Use
+## Environment Variables in Use
 
 | Variable | Used In | Purpose |
 |-----------|----------|----------|
@@ -141,28 +140,28 @@ the app saves \`BookmarkedPage\` and \`LastReadTimestamp\` to DynamoDB.
 
 ---
 
-## ?? Example DynamoDB Table (Bookshelf)
+## Example DynamoDB Table (Bookshelf)
 
 | UserId | BookId | Title | S3Key | BookmarkedPage | LastReadTimestamp |
 |--------|--------|--------|--------|----------------|------------------|
 | u123 | book1 | AWS Week 1 Overview | week1.pdf | 5 | 2025-10-04T15:22:00Z |
-| u123 | book2 | Week 2 � Cloud Storage | week2.pdf | 1 | 2025-10-02T14:05:10Z |
+| u123 | book2 | Week 2 – Cloud Storage | week2.pdf | 1 | 2025-10-02T14:05:10Z |
 
 ---
 
-## ?? Optional Enhancements
+## Optional Enhancements
 
-- ? Add a �Continue Reading� button that reloads \`Helper.SelectedBookStream\`
-- ? Display formatted last-read date in the bookshelf
-- ? Use AWS Cognito for login authentication
-- ? Add a progress bar to show % of book read
+- ✅ Add a “Continue Reading” button that reloads \`Helper.SelectedBookStream\`
+- ✅ Display formatted last-read date in the bookshelf
+- ✅ Use AWS Cognito for login authentication
+- ✅ Add a progress bar to show % of book read
 
 ---
 
-## ????? Author
+##  Author
 
 **Van Nguyen**  
-COMP306 � Lab 2  
+COMP306 – Lab 2  
 Centennial College  
 London, Ontario, Canada  
 

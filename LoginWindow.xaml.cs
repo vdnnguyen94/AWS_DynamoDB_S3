@@ -82,9 +82,9 @@ namespace _301289600Nguyen_Lab2
                     MessageBox.Show($"Welcome, {userProfile.FullName}!", "Login Successful", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     // NEXT Open the next window (BookshelfWindow)
-                    // var bookshelfWindow = new BookshelfWindow(userProfile);
-                    // bookshelfWindow.Show();
-                    // this.Close();
+                    var bookshelfWindow = new MyBookListWindow(userProfile);
+                    bookshelfWindow.Show();
+                    this.Close();
                 }
                 else
                 {

@@ -63,11 +63,21 @@ namespace _301289600Nguyen_Lab2
         {
             if (BooksListView.SelectedItem is BookshelfItem selectedBook)
             {
-                MessageBox.Show($"You selected the book: {selectedBook.Title}\n\n(The book reader window will open here in the next step.)");
+                var bookReaderWindow = new BookReadingWindow(selectedBook, _context);
 
-                //next step
+                // Subscribe to the BookUpdated event
+                bookReaderWindow.BookUpdated += async (updatedBook) =>
+                {
+                    // Re-fetch all books after update
+                    var userBooks = await _bookOps.GetBooksForUserAsync(_currentUser.UserId);
+                    BooksListView.ItemsSource = userBooks;
+                };
+
+                bookReaderWindow.Show();
             }
         }
+
+
 
     }
 }

@@ -1,0 +1,26 @@
+﻿<Window x:Class="_301289600Nguyen_Lab2.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_301289600Nguyen_Lab2"
+        mc:Ignorable="d"
+        Title="AWS EBook Login" Height="450" Width="600"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" Margin="40">
+            <TextBlock Text="Bookshelf Reader Login" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+            <TextBlock x:Name="StatusTextBlock" Text="Connecting to AWS..." HorizontalAlignment="Center" Margin="0,0,0,15" FontStyle="Italic" Foreground="Gray"/>
+
+            <TextBlock Text="Username (Email):" Margin="0,10,0,5"/>
+            <TextBox x:Name="UsernameTextBox" Padding="5" FontSize="14"/>
+
+            <TextBlock Text="Password:" Margin="0,10,0,5"/>
+            <PasswordBox x:Name="PasswordBox" Padding="5" FontSize="14"/>
+
+            <Button x:Name="LoginButton" Content="Login" Margin="0,20,0,0" Padding="10" FontSize="16" Click="LoginButton_Click" IsEnabled="False" Background="#FF185F7D"/>
+        </StackPanel>
+    </Grid>
+</Window>
